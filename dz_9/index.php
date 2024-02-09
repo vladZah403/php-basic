@@ -25,10 +25,12 @@ function factorial(int $num_factorial) :int {
 $arr = [];
 function paired_numbers(array $arr) :array
 {
-    for ($i = 1; $i <= 20; $i++){
+    $i = 1;
+    while ( $i <= 20){
         if( $i % 2 === 0){
             $arr[$i] = $i;
         }
+        $i++;
     }
     return $arr;
 }
