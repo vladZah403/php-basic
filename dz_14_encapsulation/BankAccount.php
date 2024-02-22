@@ -5,10 +5,16 @@ class BankAccount
     private string $number;
     private int $balance;
 
-    public function __construct()
+    public function __construct(string $number, int $balance)
     {
-        $this->number = rand(100,900);
-        $this->balance = 0;
+        $this->number = $number;
+        if ($balance >= 0) {
+            $this->balance = $balance;
+        } else {
+            throw new Exception('Баланис не може бути відемним значенням');
+        }
+
+
     }
 
     /**
@@ -24,7 +30,7 @@ class BankAccount
      */
     public function setBalance(int $balance): void
     {
-            $this->balance = $balance;
+        $this->balance = $balance;
     }
 
     /**
@@ -42,23 +48,23 @@ class BankAccount
     {
         $this->number = $number;
     }
+
     public function replenishment(int $number): void
     {
-        if( $number > 0 ){
+        if ($number > 0) {
             $this->balance += $number;
-            echo "Рахунок поповнено на  : ". $number. " Ваш баланс : ". $this->balance. PHP_EOL;
-        }else{
+
+        } else {
             throw new Exception('Неможливо поповнити баланис сумою меншою за 1');
         }
 
     }
 
-    public function withdrawalMoney (int $number):void
+    public function withdrawalMoney(int $number): void
     {
-        if( $number <= $this->balance){
+        if ($number <= $this->balance && $number > 0) {
             $this->balance -= $number;
-            echo "Знято : ". $number. " Залишок : ". $this->balance.PHP_EOL;
-        }else{
+        } else {
             throw new Exception('Неможливо зняти кошти');
         }
     }
