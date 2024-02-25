@@ -8,11 +8,7 @@ class BankAccount
     public function __construct(string $number, int $balance)
     {
         $this->number = $number;
-        if ($balance >= 0) {
-            $this->balance = $balance;
-        } else {
-            throw new Exception('Баланис не може бути відемним значенням');
-        }
+        $this->setBalance($balance);
 
 
     }
@@ -28,9 +24,14 @@ class BankAccount
     /**
      * @param int $balance
      */
-    public function setBalance(int $balance): void
+    private function setBalance(int $balance): void
     {
-        $this->balance = $balance;
+        if ($balance >= 0) {
+            $this->balance = $balance;
+        } else {
+            throw new Exception('Баланис не може бути відемним значенням');
+        }
+
     }
 
     /**
